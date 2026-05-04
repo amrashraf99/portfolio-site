@@ -175,143 +175,174 @@ const ModalSystem = (() => {
 /* ──────────────────────────────────────────────────────────────
    7. SERVICE MODALS — data definitions + trigger
 ────────────────────────────────────────────────────────────── */
+
+// Global language state (kept in sync by initLangToggle)
+let currentLang = localStorage.getItem('lang') || 'en';
+
+// Bilingual labels used inside all modals
+const modalTranslations = {
+  en: {
+    workflow: 'Workflow Steps',
+    tools:    'Tools Used',
+    example:  'Real Example',
+    problem:  'The Problem',
+    solution: 'The Solution',
+    outcome:  'Outcome',
+    topics:   'Topics Covered',
+    email:    'Email Me',
+    discuss:  'Discuss a Project',
+    ask:      'Ask About This',
+  },
+  ar: {
+    workflow: 'خطوات العمل',
+    tools:    'الأدوات المستخدمة',
+    example:  'مثال عملي',
+    problem:  'المشكلة',
+    solution: 'الحل',
+    outcome:  'النتيجة',
+    topics:   'المواضيع',
+    email:    'تواصل عبر البريد',
+    discuss:  'ناقش مشروعك',
+    ask:      'استفسر عن الدورة',
+  },
+};
+
+// Helper: get translated field (string or {en,ar} object)
+const t = (field) => (field && typeof field === 'object') ? (field[currentLang] || field.en) : field;
+
 const SERVICES = {
   s1: {
-    tag: 'Accounting',
-    title: 'Accounting Systems Setup',
-    desc: 'End-to-end implementation and configuration of cloud accounting platforms (Daftra, Qoyod, Rawa, Wafiq, Phenix) tailored for small and medium enterprises in Saudi Arabia. From initial setup to ongoing monthly reporting.',
-    steps: [
-      'Assess current business workflow and data structure',
-      'Configure chart of accounts aligned with GAAP & ZATCA requirements',
-      'Migrate historical data and opening balances',
-      'Set up automated invoicing, purchase orders and expense tracking',
-      'Build monthly reporting templates for management review',
-      'Train staff on daily usage and best practices',
-    ],
+    tag:   { en: 'Accounting',           ar: 'محاسبة' },
+    title: { en: 'Accounting Systems Setup', ar: 'إعداد الأنظمة المحاسبية' },
+    desc:  { en: 'End-to-end implementation and configuration of cloud accounting platforms (Daftra, Qoyod, Rawa, Wafiq, Phenix) tailored for small and medium enterprises in Saudi Arabia. From initial setup to ongoing monthly reporting.',
+             ar: 'تنفيذ وتهيئة منصات المحاسبة السحابية (دفترة، قيود، رواء، وافق، فينيكس) المخصصة للمنشآت الصغيرة والمتوسطة في المملكة العربية السعودية. من الإعداد الأولي إلى التقارير الشهرية الدورية.' },
+    steps: {
+      en: ['Assess current business workflow and data structure', 'Configure chart of accounts aligned with GAAP & ZATCA requirements', 'Migrate historical data and opening balances', 'Set up automated invoicing, purchase orders and expense tracking', 'Build monthly reporting templates for management review', 'Train staff on daily usage and best practices'],
+      ar: ['تقييم سير العمل الحالي وهيكل البيانات', 'تهيئة دليل الحسابات وفق متطلبات المعايير المحاسبية وزاتكا', 'ترحيل البيانات التاريخية والأرصدة الافتتاحية', 'إعداد الفواتير الآلية وأوامر الشراء وتتبع المصروفات', 'بناء نماذج التقارير الشهرية لمراجعة الإدارة', 'تدريب الموظفين على الاستخدام اليومي وأفضل الممارسات'],
+    },
     tools: ['Daftra', 'Qoyod', 'Rawa', 'Wafiq', 'Phenix', 'Excel', 'ZATCA Portal'],
-    example: 'Migrated a contracting firm from spreadsheets to Daftra in under 3 weeks, reducing monthly close time by 60%.',
+    example: { en: 'Migrated a contracting firm from spreadsheets to Daftra in under 3 weeks, reducing monthly close time by 60%.',
+               ar: 'تم ترحيل شركة مقاولات من جداول بيانات إلى دفترة في أقل من 3 أسابيع، مما قلّص وقت الإغلاق الشهري بنسبة 60%.' },
   },
   s2: {
-    tag: 'Tax & Compliance',
-    title: 'VAT & ZATCA Compliance',
-    desc: 'Monthly and quarterly VAT filing, account reconciliation and audit-ready documentation. Ensuring full compliance with ZATCA regulations so businesses avoid penalties and pass audits confidently.',
-    steps: [
-      'Review and categorise all taxable transactions',
-      'Reconcile VAT ledger with sales and purchase registers',
-      'Prepare VAT return (Form 101) on the ZATCA portal',
-      'Generate supporting schedules and exception reports',
-      'Document all adjustments with proper audit trails',
-      'Deliver a clean compliance summary to management',
-    ],
+    tag:   { en: 'Tax & Compliance', ar: 'ضريبة وامتثال' },
+    title: { en: 'VAT & ZATCA Compliance', ar: 'الامتثال لضريبة القيمة المضافة وزاتكا' },
+    desc:  { en: 'Monthly and quarterly VAT filing, account reconciliation and audit-ready documentation. Ensuring full compliance with ZATCA regulations so businesses avoid penalties and pass audits confidently.',
+             ar: 'تقديم إقرارات ضريبة القيمة المضافة الشهرية والربعية، ومطابقة الحسابات، وإعداد المستندات الجاهزة للتدقيق. ضمان الامتثال الكامل للوائح زاتكا لتجنب الغرامات.' },
+    steps: {
+      en: ['Review and categorise all taxable transactions', 'Reconcile VAT ledger with sales and purchase registers', 'Prepare VAT return (Form 101) on the ZATCA portal', 'Generate supporting schedules and exception reports', 'Document all adjustments with proper audit trails', 'Deliver a clean compliance summary to management'],
+      ar: ['مراجعة وتصنيف جميع المعاملات الخاضعة للضريبة', 'تسوية دفتر ضريبة القيمة المضافة مع سجلات المبيعات والمشتريات', 'إعداد الإقرار الضريبي (النموذج 101) على بوابة زاتكا', 'إنشاء الجداول الداعمة وتقارير الاستثناءات', 'توثيق جميع التسويات بمسارات تدقيق سليمة', 'تسليم ملخص امتثال نظيف للإدارة'],
+    },
     tools: ['ZATCA Portal', 'Excel', 'Qoyod', 'Daftra', 'Power Query'],
-    example: 'Standardised the VAT workflow for a water company, reducing filing errors to near-zero across 9 consecutive months.',
+    example: { en: 'Standardised the VAT workflow for a water company, reducing filing errors to near-zero across 9 consecutive months.',
+               ar: 'توحيد سير عمل ضريبة القيمة المضافة لشركة مياه، مما أدى إلى خفض أخطاء التقديم إلى شبه صفر على مدى 9 أشهر متتالية.' },
   },
   s3: {
-    tag: 'Finance',
-    title: 'Financial Reporting & Analysis',
-    desc: 'Custom Excel dashboards, cost models, and pricing analyses that transform raw journal entries into actionable management decisions. Covers income statements, balance sheets, cash flow projections, and job-costing.',
-    steps: [
-      'Gather and clean source data from accounting systems',
-      'Build structured Excel models with automated formulas',
-      'Create pivot-table dashboards with KPI summaries',
-      'Conduct variance analysis and cost-driver identification',
-      'Prepare executive summary with visual charts',
-      'Schedule recurring model updates for ongoing monitoring',
-    ],
+    tag:   { en: 'Finance', ar: 'تحليل مالي' },
+    title: { en: 'Financial Reporting & Analysis', ar: 'إعداد التقارير والتحليل المالي' },
+    desc:  { en: 'Custom Excel dashboards, cost models, and pricing analyses that transform raw journal entries into actionable management decisions. Covers income statements, balance sheets, cash flow projections, and job-costing.',
+             ar: 'لوحات تحكم Excel مخصصة، ونماذج التكاليف، وتحليلات التسعير التي تحوّل القيود المحاسبية الخام إلى قرارات إدارية قابلة للتنفيذ. تشمل قوائم الدخل والميزانيات وتوقعات التدفق النقدي ومحاسبة الوظائف.' },
+    steps: {
+      en: ['Gather and clean source data from accounting systems', 'Build structured Excel models with automated formulas', 'Create pivot-table dashboards with KPI summaries', 'Conduct variance analysis and cost-driver identification', 'Prepare executive summary with visual charts', 'Schedule recurring model updates for ongoing monitoring'],
+      ar: ['جمع وتنظيف البيانات المصدرية من الأنظمة المحاسبية', 'بناء نماذج Excel منظمة بمعادلات آلية', 'إنشاء لوحات تحكم بالجداول المحورية وملخصات مؤشرات الأداء', 'إجراء تحليل الانحرافات وتحديد محركات التكاليف', 'إعداد ملخص تنفيذي مع مخططات بيانية', 'جدولة تحديثات دورية للنموذج للمتابعة المستمرة'],
+    },
     tools: ['Excel (Advanced)', 'Power Query', 'Pivot Tables', 'Daftra', 'Qoyod'],
-    example: 'Built a manufacturing cost model linking 5 production stages to project-level profitability for a steel contracting firm.',
+    example: { en: 'Built a manufacturing cost model linking 5 production stages to project-level profitability for a steel contracting firm.',
+               ar: 'بناء نموذج تكاليف تصنيع يربط 5 مراحل إنتاجية بربحية المشروع لشركة مقاولات فولاذية.' },
   },
   s4: {
-    tag: 'Design',
-    title: 'UI / UX Design',
-    desc: 'Wireframes and high-fidelity Figma mockups for finance tools, admin dashboards, and SME web apps — with full Arabic/RTL support. Clean, user-tested designs ready for developer handoff.',
-    steps: [
-      'Conduct stakeholder interview to define user needs',
-      'Sketch low-fidelity wireframes for key user flows',
-      'Design high-fidelity Figma screens with design system',
-      'Apply Arabic-first typography and RTL layout rules',
-      'Prototype interactive flows for usability testing',
-      'Package and deliver Figma file with style guide',
-    ],
+    tag:   { en: 'Design', ar: 'تصميم' },
+    title: { en: 'UI / UX Design', ar: 'تصميم واجهات المستخدم وتجربته' },
+    desc:  { en: 'Wireframes and high-fidelity Figma mockups for finance tools, admin dashboards, and SME web apps — with full Arabic/RTL support. Clean, user-tested designs ready for developer handoff.',
+             ar: 'إطارات سلكية ونماذج Figma عالية الدقة لأدوات المالية ولوحات التحكم الإدارية وتطبيقات الويب للمنشآت الصغيرة — مع دعم كامل للعربية وRTL. تصاميم نظيفة جاهزة للتسليم للمطورين.' },
+    steps: {
+      en: ['Conduct stakeholder interview to define user needs', 'Sketch low-fidelity wireframes for key user flows', 'Design high-fidelity Figma screens with design system', 'Apply Arabic-first typography and RTL layout rules', 'Prototype interactive flows for usability testing', 'Package and deliver Figma file with style guide'],
+      ar: ['إجراء مقابلات مع أصحاب المصلحة لتحديد احتياجات المستخدمين', 'رسم إطارات سلكية منخفضة الدقة للمسارات الرئيسية', 'تصميم شاشات Figma عالية الدقة بنظام تصميم متكامل', 'تطبيق الطباعة العربية أولاً وقواعد تخطيط RTL', 'إنشاء نماذج أولية تفاعلية لاختبار قابلية الاستخدام', 'تغليف وتسليم ملف Figma مع دليل الأنماط'],
+    },
     tools: ['Figma', 'FigJam', 'Auto Layout', 'RTL Design', 'Iconify'],
-    example: 'Designed a bilingual finance dashboard concept for Saudi SMEs — mobile-first, RTL-aware, with dark mode.',
+    example: { en: 'Designed a bilingual finance dashboard concept for Saudi SMEs — mobile-first, RTL-aware, with dark mode.',
+               ar: 'تصميم لوحة تحكم مالية ثنائية اللغة للمنشآت السعودية الصغيرة — جوال أولاً، وعي بـRTL، مع وضع داكن.' },
   },
   s5: {
-    tag: 'Frontend',
-    title: 'Simple Websites & Landing Pages',
-    desc: 'Responsive, fast-loading landing pages and small dashboards built with clean HTML, CSS, and JavaScript — or React/Tailwind for more interactive needs. No bloated frameworks, just solid code.',
-    steps: [
-      'Define scope: pages, sections, and interactive features',
-      'Design component structure and responsive breakpoints',
-      'Build semantic HTML with accessible markup',
-      'Style with CSS variables or Tailwind utility classes',
-      'Add smooth animations and micro-interactions',
-      'Test across devices, optimise and deliver source files',
-    ],
+    tag:   { en: 'Frontend', ar: 'تطوير الواجهات' },
+    title: { en: 'Simple Websites & Landing Pages', ar: 'مواقع ويب وصفحات هبوط بسيطة' },
+    desc:  { en: 'Responsive, fast-loading landing pages and small dashboards built with clean HTML, CSS, and JavaScript — or React/Tailwind for more interactive needs. No bloated frameworks, just solid code.',
+             ar: 'صفحات هبوط سريعة التحميل ومتجاوبة ولوحات تحكم صغيرة مبنية بـHTML وCSS وJavaScript النظيفة — أو React/Tailwind للاحتياجات التفاعلية. لا أطر منتفخة، فقط كود متين.' },
+    steps: {
+      en: ['Define scope: pages, sections, and interactive features', 'Design component structure and responsive breakpoints', 'Build semantic HTML with accessible markup', 'Style with CSS variables or Tailwind utility classes', 'Add smooth animations and micro-interactions', 'Test across devices, optimise and deliver source files'],
+      ar: ['تحديد النطاق: الصفحات والأقسام والميزات التفاعلية', 'تصميم هيكل المكونات ونقاط التوقف المتجاوبة', 'بناء HTML دلالي مع ترميز يسهل الوصول إليه', 'التنسيق بمتغيرات CSS أو فئات Tailwind', 'إضافة حركات سلسة وتفاعلات دقيقة', 'الاختبار عبر الأجهزة والتحسين وتسليم الملفات المصدرية'],
+    },
     tools: ['HTML5', 'CSS3', 'JavaScript', 'Tailwind CSS', 'React', 'Vercel / Netlify'],
-    example: 'Built this portfolio site as a fully bilingual (EN/AR) responsive site — 100 Lighthouse performance score on desktop.',
+    example: { en: 'Built this portfolio site as a fully bilingual (EN/AR) responsive site — 100 Lighthouse performance score on desktop.',
+               ar: 'بناء موقع المحفظة هذا كموقع ثنائي اللغة (EN/AR) متجاوب — نتيجة Lighthouse 100 على سطح المكتب.' },
   },
   s6: {
-    tag: 'Training',
-    title: 'Excel Training Sessions',
-    desc: 'Practical, hands-on Excel training tailored to finance and accounting teams. Covering advanced formulas, pivot tables, financial automation and dashboard building — sessions in Arabic or English.',
-    steps: [
-      'Assess current team skill level and pain points',
-      'Design curriculum around real daily accounting tasks',
-      'Deliver interactive session with live worked examples',
-      'Provide take-home practice files and formula cheat-sheet',
-      'Follow-up Q&A session one week later',
-      'Optional: build a custom template for the team',
-    ],
+    tag:   { en: 'Training', ar: 'تدريب' },
+    title: { en: 'Excel Training Sessions', ar: 'جلسات تدريب Excel' },
+    desc:  { en: 'Practical, hands-on Excel training tailored to finance and accounting teams. Covering advanced formulas, pivot tables, financial automation and dashboard building — sessions in Arabic or English.',
+             ar: 'تدريب عملي على Excel مخصص لفرق المالية والمحاسبة. يشمل المعادلات المتقدمة والجداول المحورية والأتمتة المالية وبناء لوحات التحكم — جلسات بالعربية أو الإنجليزية.' },
+    steps: {
+      en: ['Assess current team skill level and pain points', 'Design curriculum around real daily accounting tasks', 'Deliver interactive session with live worked examples', 'Provide take-home practice files and formula cheat-sheet', 'Follow-up Q&A session one week later', 'Optional: build a custom template for the team'],
+      ar: ['تقييم مستوى مهارات الفريق ونقاط الألم الحالية', 'تصميم منهج حول مهام المحاسبة اليومية الفعلية', 'تقديم جلسة تفاعلية مع أمثلة عملية مباشرة', 'توفير ملفات تدريبية وورقة مرجعية للمعادلات', 'جلسة متابعة وأسئلة وأجوبة بعد أسبوع', 'اختياري: بناء قالب مخصص للفريق'],
+    },
     tools: ['Excel (Advanced)', 'Power Query', 'Pivot Tables', 'XLOOKUP', 'Power BI (intro)'],
-    example: 'Ran a 3-session Excel course for a 6-person accounting team, helping them reduce manual report time by 70%.',
+    example: { en: 'Ran a 3-session Excel course for a 6-person accounting team, helping them reduce manual report time by 70%.',
+               ar: 'تنفيذ دورة Excel من 3 جلسات لفريق محاسبة من 6 أشخاص، مما أسهم في تقليص وقت التقارير اليدوية بنسبة 70%.' },
   },
 };
  
 (function initServiceModals() {
+  function openServiceModal(id) {
+    const svc = SERVICES[id];
+    if (!svc) return;
+    const mt = modalTranslations[currentLang];
+
+    const stepsHTML = t(svc.steps).map((s, i) => `
+      <div class="modal-step">
+        <span class="step-num">${i + 1}</span>
+        <span>${s}</span>
+      </div>
+    `).join('');
+
+    const toolsHTML = svc.tools.map(tool => `<span class="modal-tool">${tool}</span>`).join('');
+
+    const html = `
+      <div class="modal-header">
+        <div class="modal-tag">${t(svc.tag)}</div>
+        <h2 class="modal-title">${t(svc.title)}</h2>
+        <p class="modal-desc">${t(svc.desc)}</p>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-title">${mt.workflow}</div>
+        <div class="modal-steps">${stepsHTML}</div>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-title">${mt.tools}</div>
+        <div class="modal-tools-list">${toolsHTML}</div>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-title">${mt.example}</div>
+        <p style="font-size:0.9rem;color:var(--text-secondary);line-height:1.7;font-style:italic;">"${t(svc.example)}"</p>
+      </div>
+      <div class="modal-ctas">
+        <a href="mailto:amrashraf631@gmail.com?subject=Inquiry: ${t(svc.title)}" class="btn btn-primary">✉ ${mt.email}</a>
+        <a href="https://wa.me/966569621221?text=Hi Amr, I'm interested in your ${t(svc.title)} service." target="_blank" class="btn btn-ghost">💬 WhatsApp</a>
+      </div>
+    `;
+
+    ModalSystem.open(html);
+  }
+
   document.querySelectorAll('.service-card[data-service]').forEach(card => {
     card.addEventListener('click', (e) => {
       e.preventDefault();
-      const id  = card.dataset.service;
-      const svc = SERVICES[id];
-      if (!svc) return;
- 
-      const stepsHTML = svc.steps.map((s, i) => `
-        <div class="modal-step">
-          <span class="step-num">${i + 1}</span>
-          <span>${s}</span>
-        </div>
-      `).join('');
- 
-      const toolsHTML = svc.tools.map(t => `<span class="modal-tool">${t}</span>`).join('');
- 
-      const html = `
-        <div class="modal-header">
-          <div class="modal-tag">${svc.tag}</div>
-          <h2 class="modal-title">${svc.title}</h2>
-          <p class="modal-desc">${svc.desc}</p>
-        </div>
-        <div class="modal-section">
-          <div class="modal-section-title">Workflow Steps</div>
-          <div class="modal-steps">${stepsHTML}</div>
-        </div>
-        <div class="modal-section">
-          <div class="modal-section-title">Tools Used</div>
-          <div class="modal-tools-list">${toolsHTML}</div>
-        </div>
-        <div class="modal-section">
-          <div class="modal-section-title">Real Example</div>
-          <p style="font-size:0.9rem;color:var(--text-secondary);line-height:1.7;font-style:italic;">"${svc.example}"</p>
-        </div>
-        <div class="modal-ctas">
-          <a href="mailto:amrashraf631@gmail.com?subject=Inquiry: ${svc.title}" class="btn btn-primary">✉ Email Me</a>
-          <a href="https://wa.me/966569621221?text=Hi Amr, I'm interested in your ${svc.title} service." target="_blank" class="btn btn-ghost">💬 WhatsApp</a>
-        </div>
-      `;
- 
-      ModalSystem.open(html);
+      const id = card.dataset.service;
+      window._activeModal = { type: 'service', id };
+      openServiceModal(id);
     });
   });
+
+  window._openServiceModal = openServiceModal;
 })();
  
  
@@ -320,102 +351,128 @@ const SERVICES = {
 ────────────────────────────────────────────────────────────── */
 const PROJECTS = {
   p1: {
-    tag: 'Accounting',
-    title: 'Daftra Implementation — Modern Supplies',
-    problem: 'A contracting company was managing all financial transactions in unstructured spreadsheets, causing delayed reports, reconciliation errors, and zero visibility into job-level costs.',
-    solution: 'Migrated all data to Daftra, rebuilt the chart of accounts from scratch aligned with Saudi GAAP, automated recurring entries, and established a monthly close checklist.',
+    tag:     { en: 'Accounting', ar: 'محاسبة' },
+    title:   { en: 'Daftra Implementation — Modern Supplies', ar: 'تطبيق دفترة — موديرن سبلايز' },
+    problem: { en: 'A contracting company was managing all financial transactions in unstructured spreadsheets, causing delayed reports, reconciliation errors, and zero visibility into job-level costs.',
+               ar: 'كانت شركة مقاولات تدير جميع معاملاتها المالية في جداول بيانات غير منظمة، مما أدى إلى تأخر التقارير وأخطاء التسوية وغياب أي رؤية لتكاليف الوظائف.' },
+    solution:{ en: 'Migrated all data to Daftra, rebuilt the chart of accounts from scratch aligned with Saudi GAAP, automated recurring entries, and established a monthly close checklist.',
+               ar: 'تم ترحيل جميع البيانات إلى دفترة، وإعادة بناء دليل الحسابات من الصفر وفق المعايير السعودية، وأتمتة القيود المتكررة، وإنشاء قائمة تحقق للإغلاق الشهري.' },
     tools: ['Daftra', 'Excel', 'ZATCA Portal', 'Power Query'],
-    outcome: 'Monthly close time reduced from 5 days to under 1. Management reports delivered by the 3rd of each month without exception.',
+    outcome: { en: 'Monthly close time reduced from 5 days to under 1. Management reports delivered by the 3rd of each month without exception.',
+               ar: 'انخفض وقت الإغلاق الشهري من 5 أيام إلى أقل من يوم واحد. تُسلَّم تقارير الإدارة بحلول الثالث من كل شهر دون استثناء.' },
     image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80',
   },
   p2: {
-    tag: 'Tax & Compliance',
-    title: 'VAT Returns Workflow (ZATCA)',
-    problem: 'Monthly VAT filings were inconsistent, error-prone, and often late — with no standardised checklist or audit trail.',
-    solution: 'Designed a repeatable 6-step monthly VAT workflow: transaction categorisation → ledger reconciliation → portal submission → documentation → manager sign-off → archive.',
+    tag:     { en: 'Tax & Compliance', ar: 'ضريبة وامتثال' },
+    title:   { en: 'VAT Returns Workflow (ZATCA)', ar: 'سير عمل إقرارات ضريبة القيمة المضافة (زاتكا)' },
+    problem: { en: 'Monthly VAT filings were inconsistent, error-prone, and often late — with no standardised checklist or audit trail.',
+               ar: 'كانت تقديمات ضريبة القيمة المضافة الشهرية غير متسقة وعرضة للأخطاء ومتأخرة في الغالب — دون قائمة تحقق موحدة أو مسار تدقيق.' },
+    solution:{ en: 'Designed a repeatable 6-step monthly VAT workflow: transaction categorisation → ledger reconciliation → portal submission → documentation → manager sign-off → archive.',
+               ar: 'تصميم سير عمل شهري متكرر من 6 خطوات لضريبة القيمة المضافة: تصنيف المعاملات ← تسوية الدفتر ← التقديم عبر البوابة ← التوثيق ← موافقة المدير ← الأرشفة.' },
     tools: ['ZATCA Portal', 'Excel', 'Qoyod', 'Internal Controls'],
-    outcome: 'Tax filing errors dropped to near-zero across 9 consecutive months. First audit passed without queries.',
+    outcome: { en: 'Tax filing errors dropped to near-zero across 9 consecutive months. First audit passed without queries.',
+               ar: 'انخفضت أخطاء تقديم الضريبة إلى شبه صفر على مدى 9 أشهر متتالية. اجتيز أول تدقيق دون ملاحظات.' },
     image: 'https://images.pexels.com/photos/7735778/pexels-photo-7735778.jpeg?w=1200',
   },
   p3: {
-    tag: 'Cost Accounting',
-    title: 'Cost Analysis Model — Manufacturing',
-    problem: 'A steel manufacturing & installation firm had no visibility into which jobs were profitable. All costing was done manually by memory.',
-    solution: 'Built a multi-stage Excel cost model covering: raw material procurement, cutting, painting, galvanising, installation and packaging — linked to job numbers and client invoices.',
+    tag:     { en: 'Cost Accounting', ar: 'محاسبة تكاليف' },
+    title:   { en: 'Cost Analysis Model — Manufacturing', ar: 'نموذج تحليل التكاليف — التصنيع' },
+    problem: { en: 'A steel manufacturing & installation firm had no visibility into which jobs were profitable. All costing was done manually by memory.',
+               ar: 'لم تكن لدى شركة تصنيع وتركيب الفولاذ أي رؤية للوظائف المربحة. كان تحديد التكاليف يتم يدوياً من الذاكرة.' },
+    solution:{ en: 'Built a multi-stage Excel cost model covering: raw material procurement, cutting, painting, galvanising, installation and packaging — linked to job numbers and client invoices.',
+               ar: 'بناء نموذج تكاليف Excel متعدد المراحل يشمل: شراء المواد الخام والقطع والطلاء والجلفنة والتركيب والتغليف — مرتبطاً بأرقام الوظائف وفواتير العملاء.' },
     tools: ['Excel (Advanced)', 'Pivot Tables', 'Power Query', 'Named Ranges'],
-    outcome: 'Identified 3 loss-making job types. Pricing strategy adjusted, improving average project margin by an estimated 12%.',
+    outcome: { en: 'Identified 3 loss-making job types. Pricing strategy adjusted, improving average project margin by an estimated 12%.',
+               ar: 'تم تحديد 3 أنواع من الوظائف الخاسرة. تعديل استراتيجية التسعير، مما حسّن متوسط هامش المشروع بنسبة تقديرية 12%.' },
     image: 'https://images.unsplash.com/photo-1542744173-05336fcc7ad4?w=1200&q=80',
   },
   p4: {
-    tag: 'UI Design',
-    title: 'Finance Dashboard — UI Concept',
-    problem: 'Most Arabic-language accounting tools have poor UI — cluttered layouts, poor RTL support and no mobile consideration.',
-    solution: 'Designed a clean, Arabic-first finance dashboard in Figma. Used a card-based layout, dark mode, and clear visual hierarchy for KPIs, recent transactions, and budget tracking.',
+    tag:     { en: 'UI Design', ar: 'تصميم UI' },
+    title:   { en: 'Finance Dashboard — UI Concept', ar: 'لوحة تحكم مالية — تصميم مفاهيمي' },
+    problem: { en: 'Most Arabic-language accounting tools have poor UI — cluttered layouts, poor RTL support and no mobile consideration.',
+               ar: 'معظم أدوات المحاسبة باللغة العربية لديها واجهة مستخدم رديئة — تصميمات مزدحمة ودعم ضعيف لـRTL وعدم مراعاة الجوال.' },
+    solution:{ en: 'Designed a clean, Arabic-first finance dashboard in Figma. Used a card-based layout, dark mode, and clear visual hierarchy for KPIs, recent transactions, and budget tracking.',
+               ar: 'تصميم لوحة تحكم مالية نظيفة بالعربية أولاً في Figma. استخدام تصميم قائم على البطاقات والوضع الداكن وتسلسل هرمي بصري واضح لمؤشرات الأداء والمعاملات الأخيرة وتتبع الميزانية.' },
     tools: ['Figma', 'Auto Layout', 'RTL Design', 'Iconify', 'Google Fonts (Cairo)'],
-    outcome: 'Personal concept project — received positive feedback from peers on LinkedIn. Used as portfolio reference for UI/UX capability.',
+    outcome: { en: 'Personal concept project — received positive feedback from peers on LinkedIn. Used as portfolio reference for UI/UX capability.',
+               ar: 'مشروع مفاهيمي شخصي — حصل على ردود فعل إيجابية من الأقران على LinkedIn. يُستخدم كمرجع في المحفظة لإظهار قدرات UI/UX.' },
     image: 'https://images.unsplash.com/photo-1556155092-490a1ba16284?w=1200&q=80',
   },
   p5: {
-    tag: 'Frontend',
-    title: 'Personal Portfolio Site',
-    problem: 'Needed a professional online presence that showcases both accounting expertise and frontend development skills — without relying on generic templates.',
-    solution: 'Designed and built this portfolio from scratch: bilingual (EN/AR), responsive, single-page app with modular structure. Used Fraunces + DM Sans for a finance-meets-tech aesthetic.',
+    tag:     { en: 'Frontend', ar: 'تطوير الواجهات' },
+    title:   { en: 'Personal Portfolio Site', ar: 'موقع المحفظة الشخصية' },
+    problem: { en: 'Needed a professional online presence that showcases both accounting expertise and frontend development skills — without relying on generic templates.',
+               ar: 'الحاجة إلى حضور احترافي على الإنترنت يعرض كلاً من الخبرة المحاسبية ومهارات تطوير الواجهات — دون الاعتماد على قوالب جاهزة.' },
+    solution:{ en: 'Designed and built this portfolio from scratch: bilingual (EN/AR), responsive, single-page app with modular structure. Used Fraunces + DM Sans for a finance-meets-tech aesthetic.',
+               ar: 'تصميم وبناء هذه المحفظة من الصفر: ثنائية اللغة (EN/AR)، متجاوبة، تطبيق صفحة واحدة بهيكل وحدوي. استخدام Fraunces + DM Sans لجمالية تجمع بين المالية والتكنولوجيا.' },
     tools: ['HTML5', 'CSS3 (Variables)', 'JavaScript (Vanilla)', 'Google Fonts', 'Netlify'],
-    outcome: 'Live portfolio site — clean, fast, and SEO-optimised. Serves as a real working reference for frontend skills.',
+    outcome: { en: 'Live portfolio site — clean, fast, and SEO-optimised. Serves as a real working reference for frontend skills.',
+               ar: 'موقع محفظة مباشر — نظيف وسريع ومُحسَّن لمحركات البحث. يعمل كمرجع فعلي لمهارات تطوير الواجهات.' },
     image: 'https://images.unsplash.com/photo-1547658719-da2b51169166?w=1200&q=80',
   },
   p6: {
-    tag: 'Inventory',
-    title: 'Inventory Control Revamp — Masafi',
-    problem: 'High stock variance in monthly inventory counts at a bottled water company — caused by poor reconciliation cadence and inconsistent counting procedures.',
-    solution: 'Redesigned the stock-count procedure: introduced cycle counting, established reconciliation deadlines, and built an Excel tracker linking physical counts to system records.',
+    tag:     { en: 'Inventory', ar: 'مخزون' },
+    title:   { en: 'Inventory Control Revamp — Masafi', ar: 'إعادة هيكلة مراقبة المخزون — مصافي' },
+    problem: { en: 'High stock variance in monthly inventory counts at a bottled water company — caused by poor reconciliation cadence and inconsistent counting procedures.',
+               ar: 'تباين مخزون مرتفع في الجرد الشهري لشركة مياه معبأة — ناجم عن إيقاع تسوية ضعيف وإجراءات عد غير متسقة.' },
+    solution:{ en: 'Redesigned the stock-count procedure: introduced cycle counting, established reconciliation deadlines, and built an Excel tracker linking physical counts to system records.',
+               ar: 'إعادة تصميم إجراءات جرد المخزون: إدخال الجرد الدوري وتحديد مواعيد نهائية للتسوية وبناء متتبع Excel يربط الجرد الفعلي بسجلات النظام.' },
     tools: ['Excel', 'Internal Controls', 'Qoyod', 'Variance Analysis'],
-    outcome: 'Stock variance reduced by an estimated 70% within 2 months. Zero stock-related audit findings in the following quarter.',
+    outcome: { en: 'Stock variance reduced by an estimated 70% within 2 months. Zero stock-related audit findings in the following quarter.',
+               ar: 'انخفض تباين المخزون بنسبة تقديرية 70% خلال شهرين. لا نتائج تدقيق متعلقة بالمخزون في الربع التالي.' },
     image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80',
   },
 };
  
 (function initProjectModals() {
+  function openProjectModal(id) {
+    const prj = PROJECTS[id];
+    if (!prj) return;
+    const mt = modalTranslations[currentLang];
+
+    const toolsHTML = prj.tools.map(tool => `<span class="modal-tool">${tool}</span>`).join('');
+
+    const html = `
+      <div class="modal-header">
+        <div class="modal-tag">${t(prj.tag)}</div>
+        <h2 class="modal-title">${t(prj.title)}</h2>
+      </div>
+      <img src="${prj.image}" alt="${t(prj.title)}" style="width:100%;height:200px;object-fit:cover;border-radius:12px;margin-bottom:1.5rem;filter:brightness(0.8) saturate(0.7);">
+      <div class="modal-section">
+        <div class="modal-section-title">${mt.problem}</div>
+        <p style="font-size:0.9rem;color:var(--text-secondary);line-height:1.7;">${t(prj.problem)}</p>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-title">${mt.solution}</div>
+        <p style="font-size:0.9rem;color:var(--text-secondary);line-height:1.7;">${t(prj.solution)}</p>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-title">${mt.outcome}</div>
+        <p style="font-size:0.9rem;color:var(--gold-light);line-height:1.7;font-style:italic;">"${t(prj.outcome)}"</p>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-title">${mt.tools}</div>
+        <div class="modal-tools-list">${toolsHTML}</div>
+      </div>
+      <div class="modal-ctas">
+        <a href="mailto:amrashraf631@gmail.com?subject=Project Inquiry" class="btn btn-primary">✉ ${mt.discuss}</a>
+        <a href="https://wa.me/966569621221" target="_blank" class="btn btn-ghost">💬 WhatsApp</a>
+      </div>
+    `;
+
+    ModalSystem.open(html);
+  }
+
   document.querySelectorAll('.project-card[data-project]').forEach(card => {
     card.addEventListener('click', (e) => {
       e.preventDefault();
-      const id  = card.dataset.project;
-      const prj = PROJECTS[id];
-      if (!prj) return;
- 
-      const toolsHTML = prj.tools.map(t => `<span class="modal-tool">${t}</span>`).join('');
- 
-      const html = `
-        <div class="modal-header">
-          <div class="modal-tag">${prj.tag}</div>
-          <h2 class="modal-title">${prj.title}</h2>
-        </div>
-        <img src="${prj.image}" alt="${prj.title}" style="width:100%;height:200px;object-fit:cover;border-radius:12px;margin-bottom:1.5rem;filter:brightness(0.8) saturate(0.7);">
-        <div class="modal-section">
-          <div class="modal-section-title">The Problem</div>
-          <p style="font-size:0.9rem;color:var(--text-secondary);line-height:1.7;">${prj.problem}</p>
-        </div>
-        <div class="modal-section">
-          <div class="modal-section-title">The Solution</div>
-          <p style="font-size:0.9rem;color:var(--text-secondary);line-height:1.7;">${prj.solution}</p>
-        </div>
-        <div class="modal-section">
-          <div class="modal-section-title">Outcome</div>
-          <p style="font-size:0.9rem;color:var(--gold-light);line-height:1.7;font-style:italic;">"${prj.outcome}"</p>
-        </div>
-        <div class="modal-section">
-          <div class="modal-section-title">Tools Used</div>
-          <div class="modal-tools-list">${toolsHTML}</div>
-        </div>
-        <div class="modal-ctas">
-          <a href="mailto:amrashraf631@gmail.com?subject=Project Inquiry" class="btn btn-primary">✉ Discuss a Project</a>
-          <a href="https://wa.me/966569621221" target="_blank" class="btn btn-ghost">💬 WhatsApp</a>
-        </div>
-      `;
- 
-      ModalSystem.open(html);
+      const id = card.dataset.project;
+      window._activeModal = { type: 'project', id };
+      openProjectModal(id);
     });
   });
+
+  window._openProjectModal = openProjectModal;
 })();
  
  
@@ -425,81 +482,113 @@ const PROJECTS = {
 const COURSES = {
   c1: {
     icon: '📊',
-    title: 'Advanced Excel for Finance',
-    source: 'Edraak Platform',
-    desc: 'Comprehensive course covering advanced formulas (XLOOKUP, INDEX-MATCH, array formulas), Power Query for data transformation, Pivot Tables for financial reporting, and dashboard automation.',
-    topics: ['XLOOKUP & Dynamic Arrays', 'Power Query & Data Cleaning', 'Financial Dashboards', 'VBA Macro Basics', 'Scenario & Sensitivity Analysis'],
+    title:  { en: 'Advanced Excel for Finance',              ar: 'Excel المتقدم للمالية' },
+    source: { en: 'Edraak Platform',                         ar: 'منصة إدراك' },
+    desc:   { en: 'Comprehensive course covering advanced formulas (XLOOKUP, INDEX-MATCH, array formulas), Power Query for data transformation, Pivot Tables for financial reporting, and dashboard automation.',
+              ar: 'دورة شاملة تغطي المعادلات المتقدمة (XLOOKUP، INDEX-MATCH، صيغ المصفوفات)، وPower Query لتحويل البيانات، والجداول المحورية للتقارير المالية، وأتمتة لوحات التحكم.' },
+    topics: {
+      en: ['XLOOKUP & Dynamic Arrays', 'Power Query & Data Cleaning', 'Financial Dashboards', 'VBA Macro Basics', 'Scenario & Sensitivity Analysis'],
+      ar: ['XLOOKUP والمصفوفات الديناميكية', 'Power Query وتنظيف البيانات', 'لوحات التحكم المالية', 'أساسيات ماكرو VBA', 'تحليل السيناريو والحساسية'],
+    },
   },
   c2: {
     icon: '🎓',
-    title: 'Financial Accounting Fundamentals',
-    source: 'Mansoura University',
-    desc: 'Formal university curriculum covering the full accounting cycle: journal entries, ledgers, trial balance, income statement, balance sheet and cash flow statement preparation.',
-    topics: ['Double-Entry Bookkeeping', 'Financial Statements', 'Adjusting Entries', 'Closing Entries', 'Accounting Ethics'],
+    title:  { en: 'Financial Accounting Fundamentals',       ar: 'أساسيات المحاسبة المالية' },
+    source: { en: 'Mansoura University',                     ar: 'جامعة المنصورة' },
+    desc:   { en: 'Formal university curriculum covering the full accounting cycle: journal entries, ledgers, trial balance, income statement, balance sheet and cash flow statement preparation.',
+              ar: 'منهج جامعي رسمي يغطي دورة المحاسبة الكاملة: قيود اليومية والدفاتر وميزان المراجعة وقائمة الدخل والميزانية العمومية وإعداد قائمة التدفقات النقدية.' },
+    topics: {
+      en: ['Double-Entry Bookkeeping', 'Financial Statements', 'Adjusting Entries', 'Closing Entries', 'Accounting Ethics'],
+      ar: ['القيد المزدوج', 'القوائم المالية', 'قيود التسوية', 'قيود الإقفال', 'أخلاقيات المحاسبة'],
+    },
   },
   c3: {
     icon: '🏭',
-    title: 'Cost Accounting for Industrial Companies',
-    source: 'Professional Certificate',
-    desc: 'Specialised course covering job-order costing, process costing, overhead allocation, standard costing, variance analysis and cost-volume-profit analysis for manufacturing firms.',
-    topics: ['Job-Order vs Process Costing', 'Overhead Allocation', 'Standard Costs & Variances', 'CVP Analysis', 'Activity-Based Costing'],
+    title:  { en: 'Cost Accounting for Industrial Companies', ar: 'محاسبة التكاليف للشركات الصناعية' },
+    source: { en: 'Professional Certificate',                ar: 'شهادة مهنية' },
+    desc:   { en: 'Specialised course covering job-order costing, process costing, overhead allocation, standard costing, variance analysis and cost-volume-profit analysis for manufacturing firms.',
+              ar: 'دورة متخصصة تغطي تكاليف أوامر العمل والتكاليف المرحلية وتوزيع التكاليف العامة والتكاليف المعيارية وتحليل الانحرافات وتحليل التعادل للشركات الصناعية.' },
+    topics: {
+      en: ['Job-Order vs Process Costing', 'Overhead Allocation', 'Standard Costs & Variances', 'CVP Analysis', 'Activity-Based Costing'],
+      ar: ['تكاليف الأوامر مقابل التكاليف المرحلية', 'توزيع التكاليف العامة', 'التكاليف المعيارية والانحرافات', 'تحليل التعادل', 'التكاليف على أساس الأنشطة'],
+    },
   },
   c4: {
     icon: '🏗️',
-    title: 'Contracting Accounting',
-    source: 'Professional Certificate',
-    desc: 'Industry-specific accounting for construction and contracting companies — covering percentage-of-completion method, contract cost tracking, retention management, and project profitability analysis.',
-    topics: ['Percentage-of-Completion Method', 'Contract Cost Tracking', 'Retention & Milestone Billing', 'Subcontractor Management', 'Project P&L Reporting'],
+    title:  { en: 'Contracting Accounting',                  ar: 'محاسبة المقاولات' },
+    source: { en: 'Professional Certificate',                ar: 'شهادة مهنية' },
+    desc:   { en: 'Industry-specific accounting for construction and contracting companies — covering percentage-of-completion method, contract cost tracking, retention management, and project profitability analysis.',
+              ar: 'محاسبة متخصصة لشركات البناء والمقاولات — تشمل طريقة نسبة الإنجاز وتتبع تكاليف العقود وإدارة الاستقطاعات وتحليل ربحية المشاريع.' },
+    topics: {
+      en: ['Percentage-of-Completion Method', 'Contract Cost Tracking', 'Retention & Milestone Billing', 'Subcontractor Management', 'Project P&L Reporting'],
+      ar: ['طريقة نسبة الإنجاز', 'تتبع تكاليف العقود', 'الاستقطاعات والفوترة المرحلية', 'إدارة المقاولين من الباطن', 'تقارير الأرباح والخسائر للمشاريع'],
+    },
   },
   c5: {
     icon: '💼',
-    title: 'Full Financial Accounting Course',
-    source: 'Professional Certificate',
-    desc: 'End-to-end practical accounting course covering everything from recording the first entry to preparing audited financial statements — with hands-on case studies using real Saudi company scenarios.',
-    topics: ['Accounting Cycle Mastery', 'VAT Treatment', 'Bank Reconciliation', 'Payroll Accounting', 'Financial Statement Analysis'],
+    title:  { en: 'Full Financial Accounting Course',        ar: 'دورة المحاسبة المالية الكاملة' },
+    source: { en: 'Professional Certificate',                ar: 'شهادة مهنية' },
+    desc:   { en: 'End-to-end practical accounting course covering everything from recording the first entry to preparing audited financial statements — with hands-on case studies using real Saudi company scenarios.',
+              ar: 'دورة محاسبية عملية شاملة من البداية إلى النهاية تغطي كل شيء من تسجيل أول قيد إلى إعداد القوائم المالية المدققة — مع دراسات حالة عملية باستخدام سيناريوهات شركات سعودية حقيقية.' },
+    topics: {
+      en: ['Accounting Cycle Mastery', 'VAT Treatment', 'Bank Reconciliation', 'Payroll Accounting', 'Financial Statement Analysis'],
+      ar: ['إتقان الدورة المحاسبية', 'معالجة ضريبة القيمة المضافة', 'تسوية الحسابات المصرفية', 'محاسبة الرواتب', 'تحليل القوائم المالية'],
+    },
   },
   c6: {
     icon: '📋',
-    title: 'VAT Accounting & Tax Returns',
-    source: 'Professional Certificate',
-    desc: 'Saudi-specific VAT course covering ZATCA regulations, input/output tax, VAT filing procedures, exemptions, penalties, and end-to-end return preparation using the ZATCA e-portal.',
-    topics: ['VAT Fundamentals (ZATCA)', 'Input vs Output Tax', 'VAT Return Filing', 'Exempt & Zero-Rated Supplies', 'Audit Preparation'],
+    title:  { en: 'VAT Accounting & Tax Returns',            ar: 'محاسبة ضريبة القيمة المضافة والإقرارات' },
+    source: { en: 'Professional Certificate',                ar: 'شهادة مهنية' },
+    desc:   { en: 'Saudi-specific VAT course covering ZATCA regulations, input/output tax, VAT filing procedures, exemptions, penalties, and end-to-end return preparation using the ZATCA e-portal.',
+              ar: 'دورة ضريبة القيمة المضافة الخاصة بالمملكة العربية السعودية تغطي لوائح زاتكا والضريبة المدخلة والمخرجة وإجراءات تقديم الإقرارات والإعفاءات والغرامات وإعداد الإقرارات بشكل كامل عبر بوابة زاتكا الإلكترونية.' },
+    topics: {
+      en: ['VAT Fundamentals (ZATCA)', 'Input vs Output Tax', 'VAT Return Filing', 'Exempt & Zero-Rated Supplies', 'Audit Preparation'],
+      ar: ['أساسيات ضريبة القيمة المضافة (زاتكا)', 'الضريبة المدخلة مقابل المخرجة', 'تقديم الإقرار الضريبي', 'التوريدات المعفاة والخاضعة للصفر', 'الاستعداد للتدقيق'],
+    },
   },
 };
  
 (function initCourseModals() {
+  function openCourseModal(id) {
+    const crs = COURSES[id];
+    if (!crs) return;
+    const mt = modalTranslations[currentLang];
+
+    const topicsHTML = t(crs.topics).map(topic => `
+      <div class="modal-step">
+        <span style="color:var(--gold);flex-shrink:0;">✓</span>
+        <span>${topic}</span>
+      </div>
+    `).join('');
+
+    const html = `
+      <div class="modal-header">
+        <div style="font-size:3rem;margin-bottom:0.75rem;">${crs.icon}</div>
+        <div class="modal-tag">${t(crs.source)}</div>
+        <h2 class="modal-title">${t(crs.title)}</h2>
+        <p class="modal-desc">${t(crs.desc)}</p>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-title">${mt.topics}</div>
+        <div class="modal-steps">${topicsHTML}</div>
+      </div>
+      <div class="modal-ctas">
+        <a href="mailto:amrashraf631@gmail.com" class="btn btn-primary">✉ ${mt.ask}</a>
+      </div>
+    `;
+
+    ModalSystem.open(html);
+  }
+
   document.querySelectorAll('.course-card[data-course]').forEach(card => {
     card.addEventListener('click', () => {
-      const id  = card.dataset.course;
-      const crs = COURSES[id];
-      if (!crs) return;
- 
-      const topicsHTML = crs.topics.map(t => `
-        <div class="modal-step">
-          <span style="color:var(--gold);flex-shrink:0;">✓</span>
-          <span>${t}</span>
-        </div>
-      `).join('');
- 
-      const html = `
-        <div class="modal-header">
-          <div style="font-size:3rem;margin-bottom:0.75rem;">${crs.icon}</div>
-          <div class="modal-tag">${crs.source}</div>
-          <h2 class="modal-title">${crs.title}</h2>
-          <p class="modal-desc">${crs.desc}</p>
-        </div>
-        <div class="modal-section">
-          <div class="modal-section-title">Topics Covered</div>
-          <div class="modal-steps">${topicsHTML}</div>
-        </div>
-        <div class="modal-ctas">
-          <a href="mailto:amrashraf631@gmail.com" class="btn btn-primary">✉ Ask About This</a>
-        </div>
-      `;
- 
-      ModalSystem.open(html);
+      const id = card.dataset.course;
+      window._activeModal = { type: 'course', id };
+      openCourseModal(id);
     });
   });
+
+  window._openCourseModal = openCourseModal;
 })();
  
  
@@ -1276,13 +1365,13 @@ const TRANSLATIONS = {
   const html      = document.documentElement;
 
   // Restore saved language (default = 'en')
-  let currentLang = localStorage.getItem('lang') || 'en';
+  // currentLang is already set globally above; apply visuals if 'ar'
   if (currentLang === 'ar') applyLang('ar');
 
   function applyLang(lang) {
-    currentLang = lang;
-    const t = TRANSLATIONS[lang];
-    if (!t) return;
+    currentLang = lang;          // keep global in sync
+    const tr = TRANSLATIONS[lang];
+    if (!tr) return;
 
     // Set html lang + dir
     html.setAttribute('lang', lang);
@@ -1291,8 +1380,8 @@ const TRANSLATIONS = {
     // Update all elements with data-key
     document.querySelectorAll('[data-key]').forEach(el => {
       const key = el.dataset.key;
-      if (t[key] !== undefined) {
-        el.textContent = t[key];
+      if (tr[key] !== undefined) {
+        el.textContent = tr[key];
       }
     });
 
@@ -1321,6 +1410,15 @@ const TRANSLATIONS = {
     window._langEmailMsg = lang === 'ar'
       ? 'جارٍ فتح تطبيق البريد الإلكتروني…'
       : 'Opening your email client…';
+
+    // Re-render open modal in the new language
+    const overlay = document.getElementById('modal-overlay');
+    if (overlay && overlay.classList.contains('open') && window._activeModal) {
+      const { type, id } = window._activeModal;
+      if (type === 'service' && window._openServiceModal) window._openServiceModal(id);
+      if (type === 'project' && window._openProjectModal) window._openProjectModal(id);
+      if (type === 'course'  && window._openCourseModal)  window._openCourseModal(id);
+    }
 
     // Save
     localStorage.setItem('lang', lang);
