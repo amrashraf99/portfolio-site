@@ -617,7 +617,7 @@ body::before {
 .timeline-item:last-child { margin-bottom: 0; }
 .timeline-dot {
   position: absolute;
-  left: -2.5rem;
+  left: -2.8rem;
   top: 8px;
   width: 10px;
   height: 10px;
