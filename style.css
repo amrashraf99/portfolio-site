@@ -1517,7 +1517,7 @@ html[dir="rtl"] .timeline::before {
 }
 html[dir="rtl"] .timeline-dot {
   left: auto;
-  right: -2.5rem;
+  right: -2.8rem;
 }
 html[dir="rtl"] .timeline-bullets li {
   flex-direction: row-reverse;
