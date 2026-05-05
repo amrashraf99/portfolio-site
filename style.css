@@ -1594,7 +1594,7 @@ html[dir="rtl"] .hero-stats {
 
 /* Nav links RTL */
 html[dir="rtl"] .nav-links {
-  flex-direction: column;
+  flex-direction: row-reverse;
 }
 
 /* Skill bar fill direction for RTL */
