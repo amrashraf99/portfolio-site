@@ -725,6 +725,7 @@ const TRANSLATIONS = {
     hero_desc:        'Detail-oriented accountant with hands-on experience in cost analysis, inventory control and ZATCA-compliant VAT reporting — with a curious mind for design and code.',
     btn_contact:      'Get in Touch',
     btn_cv:           'Download CV',
+    btn_linkedin:     'LinkedIn ↗',
     stat_years:       'Years Experience',
     stat_systems:     'Accounting Systems',
     stat_accounts:    'Accounts Built',
@@ -742,8 +743,8 @@ const TRANSLATIONS = {
     about_phone_label:'Phone',
     about_lang_label: 'Languages',
     about_lang_val:   'Arabic (Native) · English (Professional)',
-    about_p1: "I'm Amr — a Financial Accountant based in Jeddah with a Bachelor of Commerce (Accounting) from Mansoura University. I work daily with accounting systems like Daftra, Qoyod, Rawa, Wafiq and Phenix, and genuinely enjoy turning messy numbers into reports a manager can read in 30 seconds.",
-    about_p2: "My experience spans contracting companies and industrial manufacturers — from implementing accounting systems from scratch to managing full cost models, inventory controls, and ZATCA-compliant VAT workflows. I've also worked as a storekeeper / warehouse keeper, which gave me deep practical insight into inventory management from the floor up.",
+    about_p1: "I\'m Amr — a Financial Accountant based in Jeddah with a Bachelor of Commerce (Accounting) from Mansoura University. I work daily with accounting systems like Daftra, Qoyod, Rawa, Wafiq and Phenix, and genuinely enjoy turning messy numbers into reports a manager can read in 30 seconds.",
+    about_p2: "My experience spans contracting companies and industrial manufacturers — from implementing accounting systems from scratch to managing full cost models, inventory controls, and ZATCA-compliant VAT workflows. I\'ve also worked as a storekeeper / warehouse keeper, which gave me deep practical insight into inventory management from the floor up.",
     about_p3: "On the side, I tinker with UI/UX design and frontend development — because building clean, useful interfaces is just another form of structuring information, which is exactly what accounting taught me to love.",
 
     // ── Skills
@@ -756,13 +757,64 @@ const TRANSLATIONS = {
     tab_frontend:   'Frontend',
     tab_design:     'Design',
 
+    // ── Skill names
+    sk_fin_rep: 'Financial Reporting & Analysis',
+    sk_vat:     'VAT Reporting (ZATCA)',
+    sk_cost:    'Cost Accounting & Inventory',
+    sk_fs:      'Financial Statements',
+    sk_inv:     'Inventory Management',
+    sk_cont:    'Contracting Accounting',
+    sk_excel:   'Microsoft Excel (Advanced)',
+    sk_oracle:  'Oracle ERP (Intro)',
+    sk_peach:   'Peachtree (Intro)',
+    sk_html:    'HTML5 & Semantic Markup',
+    sk_css:     'CSS3 & Responsive Layouts',
+    sk_js:      'JavaScript Fundamentals',
+    sk_tailwind:'Tailwind CSS',
+    sk_react:   'React (Learning)',
+    sk_ux:      'UI / UX Principles',
+    sk_wire:    'Wireframing & Prototyping',
+    sk_color:   'Color & Typography',
+
     // ── Experience
     exp_label:    'Experience',
-    exp_h2:       "Where I've",
+    exp_h2:       "Where I\'ve",
     exp_h2_b:     'Worked',
     badge_current:'● Current',
     edu_label:    'Education',
     edu_degree:   'Bachelor of Commerce — Accounting',
+
+    exp1_co:     'Modern Supplies & Construction for General Contracting Est.',
+    exp1_role:   'Financial Accountant',
+    exp1_period: 'April 2025 — Present',
+    exp1_loc:    'Jeddah, Saudi Arabia',
+    exp1_b1:     'Implemented Daftra Accounting System, improving organisation and reporting efficiency',
+    exp1_b2:     'Recorded daily transactions: sales, purchases, expenses and cash receipts',
+    exp1_b3:     'Managed customer & supplier accounts and ran regular reconciliations',
+    exp1_b4:     'Prepared revenue, expense and periodic financial reports for management',
+    exp1_b5:     'Participated in pricing analysis and profit-margin calculations',
+    exp1_b6:     'Coordinated with production to link manufacturing stages to cost accounting',
+
+    exp2_co:     'Masafi Bottled Drinking Water Company',
+    exp2_role:   'Financial Accountant',
+    exp2_period: 'July 2024 — March 2025',
+    exp2_loc:    'Qassim, Saudi Arabia',
+    exp2_b1:     'Prepared journal entries with high accuracy, reducing accounting errors',
+    exp2_b2:     'Cleared delayed invoices within one month, improving cash flow',
+    exp2_b3:     'Expanded the chart of accounts by adding 20+ new accounts',
+    exp2_b4:     'Performed supplier reconciliations and resolved financial discrepancies',
+    exp2_b5:     'Improved inventory control procedures and reduced stock variances by ~70%',
+    exp2_b6:     'Assisted in VAT reporting and minimised tax-related errors',
+
+    exp3_co:     'Egy Drill Misr',
+    exp3_role:   'Storekeeper / Warehouse Keeper',
+    exp3_period: 'January 2021 - February 2022',
+    exp3_loc:    'Egypt',
+    exp3_b1:     'Managed warehouse inventory — receiving, organising, issuing and tracking stock',
+    exp3_b2:     'Maintained accurate stock records and conducted regular physical counts',
+    exp3_b3:     'Coordinated with procurement and accounting teams on purchase orders and invoices',
+    exp3_b4:     'Identified discrepancies between physical and system stock counts',
+    exp3_b5:     'Hands-on experience that informs my accounting approach to inventory management',
 
     // ── Services
     svc_label: 'Services',
@@ -791,115 +843,6 @@ const TRANSLATIONS = {
     filter_accounting:'Accounting',
     filter_design:   'UI Design',
     filter_frontend: 'Frontend',
-
-    // ── Courses
-    courses_label: 'Courses & Certifications',
-    courses_h2:    'Continuous',
-    courses_h2_b:  'Learning',
-    courses_sub:   'Click any course card to see topics covered and details.',
-
-    // ── Downloads
-    dl_label: 'Downloads',
-    dl_h2:    'Get My',
-    dl_h2_b:  'Files',
-    dl_sub:   'Download my CV, sample Excel templates, and project files.',
-
-    // ── Testimonials
-    test_label: 'Testimonials',
-    test_h2:    'What They',
-    test_h2_b:  'Say',
-
-    // ── Contact
-    contact_label: 'Contact',
-    contact_h2:    "Let's",
-    contact_h2_b:  'Talk',
-    contact_sub:   "Have a project in mind, need accounting support, or just want to say hello? I'd love to hear from you.",
-    ci_email:      'Email',
-    ci_phone:      'Phone / WhatsApp',
-    ci_loc:        'Location',
-    ci_linkedin:   'LinkedIn',
-    btn_whatsapp:  '💬 Message on WhatsApp',
-    form_name:     'Name *',
-    form_email:    'Email *',
-    form_subject:  'Subject',
-    form_message:  'Message *',
-    btn_send:      'Send Message',
-
-
-    // ── Hero LinkedIn
-    btn_linkedin: 'LinkedIn ↗',
-
-    // ── Skill names — accounting
-    sk_fin_rep: 'Financial Reporting & Analysis',
-    sk_vat:     'VAT Reporting (ZATCA)',
-    sk_cost:    'Cost Accounting & Inventory',
-    sk_fs:      'Financial Statements',
-    sk_inv:     'Inventory Management',
-    sk_cont:    'Contracting Accounting',
-    // tools
-    sk_excel:   'Microsoft Excel (Advanced)',
-    sk_oracle:  'Oracle ERP (Intro)',
-    sk_peach:   'Peachtree (Intro)',
-    // frontend
-    sk_html:    'HTML5 & Semantic Markup',
-    sk_css:     'CSS3 & Responsive Layouts',
-    sk_js:      'JavaScript Fundamentals',
-    sk_tailwind:'Tailwind CSS',
-    sk_react:   'React (Learning)',
-    // design
-    sk_ux:      'UI / UX Principles',
-    sk_wire:    'Wireframing & Prototyping',
-    sk_color:   'Color & Typography',
-
-    // ── Experience timeline
-    exp1_co:     'Modern Supplies & Construction for General Contracting Est.',
-    exp1_role:   'Financial Accountant',
-    exp1_period: 'April 2025 — Present',
-    exp1_loc:    'Saudi Arabia',
-    exp1_b1:     'Implemented Daftra Accounting System, improving organisation and reporting efficiency',
-    exp1_b2:     'Recorded daily transactions: sales, purchases, expenses and cash receipts',
-    exp1_b3:     'Managed customer & supplier accounts and ran regular reconciliations',
-    exp1_b4:     'Prepared revenue, expense and periodic financial reports for management',
-    exp1_b5:     'Participated in pricing analysis and profit-margin calculations',
-    exp1_b6:     'Coordinated with production to link manufacturing stages to cost accounting',
-
-    exp2_b1: 'Prepared journal entries with high accuracy, reducing accounting errors',
-    exp2_b2: 'Cleared delayed invoices within one month, improving cash flow',
-    exp2_b3: 'Expanded the chart of accounts by adding 20+ new accounts',
-    exp2_b4: 'Performed supplier reconciliations and resolved financial discrepancies',
-    exp2_b5: 'Improved inventory control procedures and reduced stock variances by ~70%',
-    exp2_b6: 'Assisted in VAT reporting and minimised tax-related errors',
-
-    exp3_b1: 'Managed warehouse inventory — receiving, organising, issuing and tracking stock',
-    exp3_b2: 'Maintained accurate stock records and conducted regular physical counts',
-    exp3_b3: 'Coordinated with procurement and accounting teams on purchase orders and invoices',
-    exp3_b4: 'Identified discrepancies between physical and system stock counts',
-    exp3_b5: 'Hands-on experience that informs my accounting approach to inventory management',
-
-
-    exp2_co:     'Masafi Bottled Drinking Water Company',
-    exp2_role:   'Financial Accountant',
-    exp2_period: 'July 2024 — March 2025',
-    exp2_loc:    'Qassim, Saudi Arabia',
-
-    exp3_co:     'Egy Drill Misr',
-    exp3_role:   'Storekeeper / Warehouse Keeper',
-    exp3_period: 'January 2021 - February 2022',
-    exp3_loc:    'Egypt',
-
-    exp2_b1: 'إعداد قيود اليومية بدقة عالية مما أدى إلى تقليل الأخطاء المحاسبية',
-    exp2_b2: 'تسوية الفواتير المتأخرة خلال شهر واحد مما حسّن التدفق النقدي',
-    exp2_b3: 'توسيع دليل الحسابات بإضافة أكثر من 20 حساباً جديداً',
-    exp2_b4: 'إجراء تسويات الموردين وحل التناقضات المالية',
-    exp2_b5: 'تحسين إجراءات ضبط المخزون وتقليص تباينات المخزون بنسبة ~70%',
-    exp2_b6: 'المساعدة في إعداد تقارير ضريبة القيمة المضافة وتقليل الأخطاء الضريبية',
-
-    exp3_b1: 'إدارة مخزون المستودع — الاستلام والتنظيم والصرف والمتابعة',
-    exp3_b2: 'الحفاظ على سجلات مخزون دقيقة وإجراء الجرد الدوري',
-    exp3_b3: 'التنسيق مع فرق المشتريات والمحاسبة بشأن أوامر الشراء والفواتير',
-    exp3_b4: 'تحديد التناقضات بين الجرد الفعلي وسجلات النظام',
-    exp3_b5: 'خبرة عملية تُعزز مقاربتي المحاسبية لإدارة المخزون',
-
 
     // ── Expertise tags
     tag_fin:  'Financial Accounting',
@@ -933,7 +876,11 @@ const TRANSLATIONS = {
     p6_title: 'Inventory Control Revamp — Masafi',
     p6_sum:   'Redesigned stock-count procedures and reconciliation cadence, materially reducing stock variances.',
 
-    // ── Course cards
+    // ── Courses
+    courses_label: 'Courses & Certifications',
+    courses_h2:    'Continuous',
+    courses_h2_b:  'Learning',
+    courses_sub:   'Click any course card to see topics covered and details.',
     c1_title: 'Advanced Excel for Finance',
     c1_src:   'Edraak Platform',
     c2_title: 'Financial Accounting',
@@ -947,7 +894,11 @@ const TRANSLATIONS = {
     c6_title: 'VAT & Tax Returns',
     c6_src:   'Professional Certificate',
 
-    // ── Download cards
+    // ── Downloads
+    dl_label: 'Downloads',
+    dl_h2:    'Get My',
+    dl_h2_b:  'Files',
+    dl_sub:   'Download my CV, sample Excel templates, and project files.',
     dl1_name: 'Curriculum Vitae (EN)',
     dl1_desc: 'Full CV — Financial Accountant & UI/UX',
     dl2_name: 'VAT Tracker Template',
@@ -958,20 +909,37 @@ const TRANSLATIONS = {
     dl4_desc: 'HTML, CSS, JS source for this site',
 
     // ── Testimonials
+    test_label: 'Testimonials',
+    test_h2:    'What They',
+    test_h2_b:  'Say',
     t1_text:   'Amr restructured our chart of accounts in weeks. Monthly reports now land on my desk on the 3rd, every month.',
     t1_author: 'Operations Manager — Modern Supplies',
     t2_text:   'Tax-filing errors dropped to near zero after Amr standardised our VAT workflow. Detail-oriented and reliable.',
     t2_author: 'Finance Lead — Masafi Water',
 
-    // ── Footer links
+    // ── Contact
+    contact_label: 'Contact',
+    contact_h2:    "Let\'s",
+    contact_h2_b:  'Talk',
+    contact_sub:   "Have a project in mind, need accounting support, or just want to say hello? I\'d love to hear from you.",
+    ci_email:      'Email',
+    ci_phone:      'Phone / WhatsApp',
+    ci_loc:        'Location',
+    ci_linkedin:   'LinkedIn',
+    btn_whatsapp:  '💬 Message on WhatsApp',
+    form_name:     'Name *',
+    form_email:    'Email *',
+    form_subject:  'Subject',
+    form_message:  'Message *',
+    btn_send:      'Send Message',
+
+    // ── Footer
     foot_about:    'About',
     foot_services: 'Services',
     foot_projects: 'Projects',
     foot_contact:  'Contact',
     foot_linkedin: 'LinkedIn ↗',
-
-    // ── Footer
-    footer_copy: '© 2025 Amr Ashraf · Jeddah, Saudi Arabia',
+    footer_copy:   '© 2025 Amr Ashraf · Jeddah, Saudi Arabia',
   },
 
   ar: {
@@ -991,6 +959,7 @@ const TRANSLATIONS = {
     hero_desc:        'محاسب دقيق بخبرة عملية في تحليل التكاليف، ومراقبة المخزون، وإعداد تقارير ضريبة القيمة المضافة وفق متطلبات هيئة الزكاة والضريبة — مع شغف حقيقي بالتصميم والبرمجة.',
     btn_contact:      'تواصل معي',
     btn_cv:           'تحميل السيرة الذاتية',
+    btn_linkedin:     'لينكد إن ↗',
     stat_years:       'سنوات خبرة',
     stat_systems:     'أنظمة محاسبية',
     stat_accounts:    'حساب منجز',
@@ -1022,6 +991,25 @@ const TRANSLATIONS = {
     tab_frontend:   'تطوير الواجهات',
     tab_design:     'التصميم',
 
+    // ── Skill names
+    sk_fin_rep: 'التقارير والتحليل المالي',
+    sk_vat:     'إقرارات ضريبة القيمة المضافة (زاتكا)',
+    sk_cost:    'محاسبة التكاليف والمخزون',
+    sk_fs:      'القوائم المالية',
+    sk_inv:     'إدارة المخزون',
+    sk_cont:    'محاسبة المقاولات',
+    sk_excel:   'Microsoft Excel (متقدم)',
+    sk_oracle:  'Oracle ERP (مبتدئ)',
+    sk_peach:   'Peachtree (مبتدئ)',
+    sk_html:    'HTML5 والوسوم الدلالية',
+    sk_css:     'CSS3 والتصميم المتجاوب',
+    sk_js:      'أساسيات JavaScript',
+    sk_tailwind:'Tailwind CSS',
+    sk_react:   'React (قيد التعلم)',
+    sk_ux:      'مبادئ UI/UX',
+    sk_wire:    'الإطارات والنماذج الأولية',
+    sk_color:   'الألوان والطباعة',
+
     // ── Experience
     exp_label:    'الخبرة المهنية',
     exp_h2:       'أين',
@@ -1029,6 +1017,38 @@ const TRANSLATIONS = {
     badge_current:'● حالياً',
     edu_label:    'التعليم',
     edu_degree:   'بكالوريوس تجارة — محاسبة',
+
+    exp1_co:     'مؤسسة موديرن سبلايز للمقاولات العامة',
+    exp1_role:   'محاسب مالي',
+    exp1_period: 'أبريل 2025 — حتى الآن',
+    exp1_loc:    'جدة، المملكة العربية السعودية',
+    exp1_b1:     'تطبيق نظام دفترة المحاسبي وتحسين كفاءة التنظيم وإعداد التقارير',
+    exp1_b2:     'تسجيل العمليات اليومية: المبيعات والمشتريات والمصروفات والمقبوضات النقدية',
+    exp1_b3:     'إدارة حسابات العملاء والموردين وإجراء التسويات الدورية',
+    exp1_b4:     'إعداد تقارير الإيرادات والمصروفات والتقارير المالية الدورية للإدارة',
+    exp1_b5:     'المشاركة في تحليل التسعير وحسابات هامش الربح',
+    exp1_b6:     'التنسيق مع الإنتاج لربط مراحل التصنيع بمحاسبة التكاليف',
+
+    exp2_co:     'شركة مصافي لمياه الشرب المعبأة',
+    exp2_role:   'محاسب مالي',
+    exp2_period: 'يوليو 2024 — مارس 2025',
+    exp2_loc:    'القصيم، المملكة العربية السعودية',
+    exp2_b1:     'إعداد قيود اليومية بدقة عالية مما أدى إلى تقليل الأخطاء المحاسبية',
+    exp2_b2:     'تسوية الفواتير المتأخرة خلال شهر واحد مع تحسين التدفق النقدي',
+    exp2_b3:     'توسيع دليل الحسابات بإضافة أكثر من 20 حساباً جديداً',
+    exp2_b4:     'إجراء تسويات الموردين وحل التعارضات المالية',
+    exp2_b5:     'تحسين إجراءات مراقبة المخزون وتقليص الفروقات بنسبة ~70%',
+    exp2_b6:     'المساعدة في إعداد إقرارات ضريبة القيمة المضافة والحد من الأخطاء الضريبية',
+
+    exp3_co:     'إيجي دريل مصر',
+    exp3_role:   'أمين مستودع',
+    exp3_period: 'يناير 2021 - فبراير 2022',
+    exp3_loc:    'مصر',
+    exp3_b1:     'إدارة مخزون المستودع — الاستلام والتنظيم والصرف والتتبع',
+    exp3_b2:     'الحفاظ على سجلات مخزون دقيقة وإجراء جرد دوري منتظم',
+    exp3_b3:     'التنسيق مع فرق المشتريات والمحاسبة بشأن أوامر الشراء والفواتير',
+    exp3_b4:     'رصد التعارضات بين المخزون الفعلي وسجلات النظام',
+    exp3_b5:     'خبرة عملية تُثري أسلوبي المحاسبي في إدارة المخزون',
 
     // ── Services
     svc_label: 'الخدمات',
@@ -1057,232 +1077,6 @@ const TRANSLATIONS = {
     filter_accounting:'محاسبة',
     filter_design:   'تصميم UI',
     filter_frontend: 'تطوير الواجهات',
-
-    // ── Courses
-    courses_label: 'الدورات والشهادات',
-    courses_h2:    'التعلم',
-    courses_h2_b:  'المستمر',
-    courses_sub:   'اضغط على أي بطاقة دورة لمعرفة المواضيع والتفاصيل.',
-
-    // ── Downloads
-    dl_label: 'التنزيلات',
-    dl_h2:    'احصل على',
-    dl_h2_b:  'ملفاتي',
-    dl_sub:   'حمّل سيرتي الذاتية، ونماذج Excel، وملفات المشاريع.',
-
-    // ── Testimonials
-    test_label: 'آراء العملاء',
-    test_h2:    'ماذا',
-    test_h2_b:  'قالوا',
-
-    // ── Contact
-    contact_label: 'تواصل معي',
-    contact_h2:    'لنتحدث',
-    contact_h2_b:  '',
-    contact_sub:   'لديك مشروع، أو تحتاج دعماً محاسبياً، أو تريد فقط التحدث؟ يسعدني سماعك.',
-    ci_email:      'البريد الإلكتروني',
-    ci_phone:      'هاتف / واتساب',
-    ci_loc:        'الموقع',
-    ci_linkedin:   'لينكد إن',
-    btn_whatsapp:  '💬 راسلني على واتساب',
-    form_name:     'الاسم *',
-    form_email:    'البريد الإلكتروني *',
-    form_subject:  'الموضوع',
-    form_message:  'الرسالة *',
-    btn_send:      'إرسال الرسالة',
-
-
-    // ── Hero LinkedIn
-    btn_linkedin: 'LinkedIn ↗',
-
-    // ── Skill names — accounting
-    sk_fin_rep: 'Financial Reporting & Analysis',
-    sk_vat:     'VAT Reporting (ZATCA)',
-    sk_cost:    'Cost Accounting & Inventory',
-    sk_fs:      'Financial Statements',
-    sk_inv:     'Inventory Management',
-    sk_cont:    'Contracting Accounting',
-    // tools
-    sk_excel:   'Microsoft Excel (Advanced)',
-    sk_oracle:  'Oracle ERP (Intro)',
-    sk_peach:   'Peachtree (Intro)',
-    // frontend
-    sk_html:    'HTML5 & Semantic Markup',
-    sk_css:     'CSS3 & Responsive Layouts',
-    sk_js:      'JavaScript Fundamentals',
-    sk_tailwind:'Tailwind CSS',
-    sk_react:   'React (Learning)',
-    // design
-    sk_ux:      'UI / UX Principles',
-    sk_wire:    'Wireframing & Prototyping',
-    sk_color:   'Color & Typography',
-
-    // ── Experience timeline
-    exp1_co:     'Modern Supplies & Construction for General Contracting Est.',
-    exp1_role:   'Financial Accountant',
-    exp1_period: 'April 2025 — Present',
-    exp1_loc:    'Saudi Arabia',
-    exp1_b1:     'Implemented Daftra Accounting System, improving organisation and reporting efficiency',
-    exp1_b2:     'Recorded daily transactions: sales, purchases, expenses and cash receipts',
-    exp1_b3:     'Managed customer & supplier accounts and ran regular reconciliations',
-    exp1_b4:     'Prepared revenue, expense and periodic financial reports for management',
-    exp1_b5:     'Participated in pricing analysis and profit-margin calculations',
-    exp1_b6:     'Coordinated with production to link manufacturing stages to cost accounting',
-
-    exp2_b1: 'Prepared journal entries with high accuracy, reducing accounting errors',
-    exp2_b2: 'Cleared delayed invoices within one month, improving cash flow',
-    exp2_b3: 'Expanded the chart of accounts by adding 20+ new accounts',
-    exp2_b4: 'Performed supplier reconciliations and resolved financial discrepancies',
-    exp2_b5: 'Improved inventory control procedures and reduced stock variances by ~70%',
-    exp2_b6: 'Assisted in VAT reporting and minimised tax-related errors',
-
-    exp3_b1: 'Managed warehouse inventory — receiving, organising, issuing and tracking stock',
-    exp3_b2: 'Maintained accurate stock records and conducted regular physical counts',
-    exp3_b3: 'Coordinated with procurement and accounting teams on purchase orders and invoices',
-    exp3_b4: 'Identified discrepancies between physical and system stock counts',
-    exp3_b5: 'Hands-on experience that informs my accounting approach to inventory management',
-
-
-    exp2_co:     'Masafi Bottled Drinking Water Company',
-    exp2_role:   'Financial Accountant',
-    exp2_period: 'July 2024 — March 2025',
-    exp2_loc:    'Qassim, Saudi Arabia',
-
-    exp3_co:     'Egy Drill Misr',
-    exp3_role:   'Storekeeper / Warehouse Keeper',
-    exp3_period: 'January 2021 - February 2022',
-    exp3_loc:    'Egypt',
-
-    exp2_b1: 'إعداد قيود اليومية بدقة عالية مما أدى إلى تقليل الأخطاء المحاسبية',
-    exp2_b2: 'تسوية الفواتير المتأخرة خلال شهر واحد مما حسّن التدفق النقدي',
-    exp2_b3: 'توسيع دليل الحسابات بإضافة أكثر من 20 حساباً جديداً',
-    exp2_b4: 'إجراء تسويات الموردين وحل التناقضات المالية',
-    exp2_b5: 'تحسين إجراءات ضبط المخزون وتقليص تباينات المخزون بنسبة ~70%',
-    exp2_b6: 'المساعدة في إعداد تقارير ضريبة القيمة المضافة وتقليل الأخطاء الضريبية',
-
-    exp3_b1: 'إدارة مخزون المستودع — الاستلام والتنظيم والصرف والمتابعة',
-    exp3_b2: 'الحفاظ على سجلات مخزون دقيقة وإجراء الجرد الدوري',
-    exp3_b3: 'التنسيق مع فرق المشتريات والمحاسبة بشأن أوامر الشراء والفواتير',
-    exp3_b4: 'تحديد التناقضات بين الجرد الفعلي وسجلات النظام',
-    exp3_b5: 'خبرة عملية تُعزز مقاربتي المحاسبية لإدارة المخزون',
-
-
-    // ── Expertise tags
-    tag_fin:  'Financial Accounting',
-    tag_cost: 'Cost Accounting',
-    tag_inv:  'Inventory Management',
-    tag_vat:  'VAT Reports (ZATCA)',
-    tag_cont: 'Contracting Accounting',
-    tag_excel:'Excel (Advanced)',
-    tag_erp:  'ERP Systems',
-    tag_uiux: 'UI / UX Design',
-    tag_fe:   'Frontend (HTML/CSS/JS)',
-    tag_react:'React (Learning)',
-
-    // ── Project cards
-    p1_tag:   'Accounting',
-    p1_title: 'Daftra Implementation — Modern Supplies',
-    p1_sum:   'Migrated a contracting firm from spreadsheets to Daftra, structured the chart of accounts and automated monthly reporting.',
-    p2_tag:   'Tax & Compliance',
-    p2_title: 'VAT Returns Workflow (ZATCA)',
-    p2_sum:   'Designed a repeatable monthly VAT-reporting workflow with reconciliation checklists, reducing tax-filing errors significantly.',
-    p3_tag:   'Cost Accounting',
-    p3_title: 'Cost Analysis Model — Manufacturing',
-    p3_sum:   'Built an Excel cost model linking cutting, painting, galvanising, installation and packaging stages to job-level profitability.',
-    p4_tag:   'UI Design',
-    p4_title: 'Finance Dashboard — UI Concept',
-    p4_sum:   'Personal Figma concept for a clean Arabic-first finance dashboard targeting small Saudi businesses.',
-    p5_tag:   'Frontend',
-    p5_title: 'Personal Portfolio Site',
-    p5_sum:   'This portfolio — bilingual (EN/AR), responsive and built as a hands-on frontend exercise with pure HTML/CSS/JS.',
-    p6_tag:   'Inventory',
-    p6_title: 'Inventory Control Revamp — Masafi',
-    p6_sum:   'Redesigned stock-count procedures and reconciliation cadence, materially reducing stock variances.',
-
-    // ── Course cards
-    c1_title: 'Advanced Excel for Finance',
-    c1_src:   'Edraak Platform',
-    c2_title: 'Financial Accounting',
-    c2_src:   'Mansoura University',
-    c3_title: 'Cost Accounting (Industrial)',
-    c3_src:   'Professional Certificate',
-    c4_title: 'Contracting Accounting',
-    c4_src:   'Professional Certificate',
-    c5_title: 'Full Financial Accounting',
-    c5_src:   'Professional Certificate',
-    c6_title: 'VAT & Tax Returns',
-    c6_src:   'Professional Certificate',
-
-    // ── Download cards
-    dl1_name: 'Curriculum Vitae (EN)',
-    dl1_desc: 'Full CV — Financial Accountant & UI/UX',
-    dl2_name: 'VAT Tracker Template',
-    dl2_desc: 'Monthly VAT reconciliation spreadsheet',
-    dl3_name: 'Cost Analysis Model',
-    dl3_desc: 'Manufacturing cost model template',
-    dl4_name: 'Portfolio Source Files',
-    dl4_desc: 'HTML, CSS, JS source for this site',
-
-    // ── Testimonials
-    t1_text:   'Amr restructured our chart of accounts in weeks. Monthly reports now land on my desk on the 3rd, every month.',
-    t1_author: 'Operations Manager — Modern Supplies',
-    t2_text:   'Tax-filing errors dropped to near zero after Amr standardised our VAT workflow. Detail-oriented and reliable.',
-    t2_author: 'Finance Lead — Masafi Water',
-
-    // ── Footer links
-    foot_about:    'About',
-    foot_services: 'Services',
-    foot_projects: 'Projects',
-    foot_contact:  'Contact',
-    foot_linkedin: 'LinkedIn ↗',
-
-
-    // ── Hero LinkedIn
-    btn_linkedin: 'لينكد إن ↗',
-
-    // ── Skill names — accounting
-    sk_fin_rep: 'التقارير والتحليل المالي',
-    sk_vat:     'إقرارات ضريبة القيمة المضافة (زاتكا)',
-    sk_cost:    'محاسبة التكاليف والمخزون',
-    sk_fs:      'القوائم المالية',
-    sk_inv:     'إدارة المخزون',
-    sk_cont:    'محاسبة المقاولات',
-    // tools
-    sk_excel:   'Microsoft Excel (متقدم)',
-    sk_oracle:  'Oracle ERP (مبتدئ)',
-    sk_peach:   'Peachtree (مبتدئ)',
-    // frontend
-    sk_html:    'HTML5 والوسوم الدلالية',
-    sk_css:     'CSS3 والتصميم المتجاوب',
-    sk_js:      'أساسيات JavaScript',
-    sk_tailwind:'Tailwind CSS',
-    sk_react:   'React (قيد التعلم)',
-    // design
-    sk_ux:      'مبادئ UI/UX',
-    sk_wire:    'الإطارات والنماذج الأولية',
-    sk_color:   'الألوان والطباعة',
-
-    // ── Experience timeline
-    exp1_co:     'مؤسسة موديرن سبلايز للمقاولات العامة',
-    exp1_role:   'محاسب مالي',
-    exp1_period: 'أبريل 2025 — حتى الآن',
-    exp1_loc:    'المملكة العربية السعودية',
-    exp1_b1:     'تطبيق نظام دفترة المحاسبي وتحسين كفاءة التنظيم وإعداد التقارير',
-    exp1_b2:     'تسجيل العمليات اليومية: المبيعات والمشتريات والمصروفات والمقبوضات النقدية',
-    exp1_b3:     'إدارة حسابات العملاء والموردين وإجراء التسويات الدورية',
-    exp1_b4:     'إعداد تقارير الإيرادات والمصروفات والتقارير المالية الدورية للإدارة',
-    exp1_b5:     'المشاركة في تحليل التسعير وحسابات هامش الربح',
-    exp1_b6:     'التنسيق مع الإنتاج لربط مراحل التصنيع بمحاسبة التكاليف',
-
-    exp2_co:     'شركة مصافي لمياه الشرب المعبأة',
-    exp2_role:   'محاسب مالي',
-    exp2_period: 'يوليو 2024 — مارس 2025',
-    exp2_loc:    'القصيم، المملكة العربية السعودية',
-
-    exp3_co:     'إيجي دريل مصر',
-    exp3_role:   'أمين مستودع',
-    exp3_period: 'يناير 2021 - فبراير 2022',
-    exp3_loc:    'مصر',
 
     // ── Expertise tags
     tag_fin:  'محاسبة مالية',
@@ -1316,7 +1110,11 @@ const TRANSLATIONS = {
     p6_title: 'إعادة هيكلة مراقبة المخزون — مصافي',
     p6_sum:   'إعادة تصميم إجراءات جرد المخزون وجداول التسوية مما أدى إلى تقليص التباينات بصورة ملموسة.',
 
-    // ── Course cards
+    // ── Courses
+    courses_label: 'الدورات والشهادات',
+    courses_h2:    'التعلم',
+    courses_h2_b:  'المستمر',
+    courses_sub:   'اضغط على أي بطاقة دورة لمعرفة المواضيع والتفاصيل.',
     c1_title: 'Excel المتقدم للمالية',
     c1_src:   'منصة إدراك',
     c2_title: 'المحاسبة المالية',
@@ -1330,7 +1128,11 @@ const TRANSLATIONS = {
     c6_title: 'محاسبة ضريبة القيمة المضافة والإقرارات',
     c6_src:   'شهادة مهنية',
 
-    // ── Download cards
+    // ── Downloads
+    dl_label: 'التنزيلات',
+    dl_h2:    'احصل على',
+    dl_h2_b:  'ملفاتي',
+    dl_sub:   'حمّل سيرتي الذاتية، ونماذج Excel، وملفات المشاريع.',
     dl1_name: 'السيرة الذاتية (EN)',
     dl1_desc: 'سيرة ذاتية كاملة — محاسب مالي وUI/UX',
     dl2_name: 'نموذج متابعة ضريبة القيمة المضافة',
@@ -1341,20 +1143,37 @@ const TRANSLATIONS = {
     dl4_desc: 'كود HTML وCSS وJS لهذا الموقع',
 
     // ── Testimonials
+    test_label: 'آراء العملاء',
+    test_h2:    'ماذا',
+    test_h2_b:  'قالوا',
     t1_text:   'أعاد عمرو هيكلة دليل حساباتنا في أسابيع. التقارير الشهرية تصلني الآن في الثالث من كل شهر دون استثناء.',
     t1_author: 'مدير العمليات — موديرن سبلايز',
     t2_text:   'انخفضت أخطاء تقديم الضريبة إلى شبه صفر بعد أن وحّد عمرو سير عمل ضريبة القيمة المضافة. دقيق وموثوق.',
     t2_author: 'مسؤول المالية — مصافي للمياه',
 
-    // ── Footer links
+    // ── Contact
+    contact_label: 'تواصل معي',
+    contact_h2:    'لنتحدث',
+    contact_h2_b:  '',
+    contact_sub:   'لديك مشروع، أو تحتاج دعماً محاسبياً، أو تريد فقط التحدث؟ يسعدني سماعك.',
+    ci_email:      'البريد الإلكتروني',
+    ci_phone:      'هاتف / واتساب',
+    ci_loc:        'الموقع',
+    ci_linkedin:   'لينكد إن',
+    btn_whatsapp:  '💬 راسلني على واتساب',
+    form_name:     'الاسم *',
+    form_email:    'البريد الإلكتروني *',
+    form_subject:  'الموضوع',
+    form_message:  'الرسالة *',
+    btn_send:      'إرسال الرسالة',
+
+    // ── Footer
     foot_about:    'عني',
     foot_services: 'الخدمات',
     foot_projects: 'المشاريع',
     foot_contact:  'تواصل',
     foot_linkedin: 'لينكد إن ↗',
-
-    // ── Footer
-    footer_copy: '© 2025 عمرو أشرف · جدة، المملكة العربية السعودية',
+    footer_copy:   '© 2025 عمرو أشرف · جدة، المملكة العربية السعودية',
   }
 };
 
