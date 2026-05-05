@@ -1592,9 +1592,23 @@ html[dir="rtl"] .hero-stats {
   flex-direction: row-reverse;
 }
 
-/* Nav links RTL */
-html[dir="rtl"] .nav-links {
-  flex-direction: row-reverse;
+/* Nav links RTL — desktop only: reverse the row */
+@media (min-width: 769px) {
+  html[dir="rtl"] .nav-links {
+    flex-direction: row-reverse;
+  }
+}
+
+/* Nav links RTL — mobile: always force vertical column */
+@media (max-width: 768px) {
+  html[dir="rtl"] .nav-links {
+    flex-direction: column;
+    align-items: center;
+  }
+  html[dir="rtl"] .nav-links a {
+    width: 100%;
+    text-align: right;
+  }
 }
 
 /* Skill bar fill direction for RTL */
