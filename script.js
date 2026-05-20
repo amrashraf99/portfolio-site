@@ -412,7 +412,7 @@ const PROJECTS = {
   },
   p6: {
     tag:     { en: 'Inventory', ar: 'مخزون' },
-    title:   { en: 'Inventory Control Revamp — Masafi', ar: 'إعادة هيكلة مراقبة المخزون — مصافي' },
+    title:   { en: 'Inventory Control Revamp — Masafi', ar: 'إعادة هيكلة مراقبة المخزون - مسافي' },
     problem: { en: 'High stock variance in monthly inventory counts at a bottled water company — caused by poor reconciliation cadence and inconsistent counting procedures.',
                ar: 'تباين مخزون مرتفع في الجرد الشهري لشركة مياه معبأة — ناجم عن إيقاع تسوية ضعيف وإجراءات عد غير متسقة.' },
     solution:{ en: 'Redesigned the stock-count procedure: introduced cycle counting, established reconciliation deadlines, and built an Excel tracker linking physical counts to system records.',
@@ -1018,7 +1018,7 @@ const TRANSLATIONS = {
     edu_label:    'التعليم',
     edu_degree:   'بكالوريوس تجارة — محاسبة',
 
-    exp1_co:     'مؤسسة موديرن سبلايز للمقاولات العامة',
+    exp1_co:     'مؤسسة التوريدات والإنشاءات الحديثة للمقاولات العامة',
     exp1_role:   'محاسب مالي',
     exp1_period: 'أبريل 2025 — حتى الآن',
     exp1_loc:    'جدة، المملكة العربية السعودية',
@@ -1029,7 +1029,7 @@ const TRANSLATIONS = {
     exp1_b5:     'المشاركة في تحليل التسعير وحسابات هامش الربح',
     exp1_b6:     'التنسيق مع الإنتاج لربط مراحل التصنيع بمحاسبة التكاليف',
 
-    exp2_co:     'شركة مصافي لمياه الشرب المعبأة',
+    exp2_co:     'شركة مسافي لمياه الشرب المعبأة',
     exp2_role:   'محاسب مالي',
     exp2_period: 'يوليو 2024 — مارس 2025',
     exp2_loc:    'القصيم، المملكة العربية السعودية',
@@ -1107,7 +1107,7 @@ const TRANSLATIONS = {
     p5_title: 'موقع المحفظة الشخصية',
     p5_sum:   'هذا الموقع — ثنائي اللغة (EN/AR)، متجاوب، تمرين عملي في تطوير الواجهات باستخدام HTML/CSS/JS.',
     p6_tag:   'مخزون',
-    p6_title: 'إعادة هيكلة مراقبة المخزون — مصافي',
+    p6_title: 'إعادة هيكلة مراقبة المخزون — مسافي',
     p6_sum:   'إعادة تصميم إجراءات جرد المخزون وجداول التسوية مما أدى إلى تقليص التباينات بصورة ملموسة.',
 
     // ── Courses
@@ -1149,7 +1149,7 @@ const TRANSLATIONS = {
     t1_text:   'أعاد عمرو هيكلة دليل حساباتنا في أسابيع. التقارير الشهرية تصلني الآن في الثالث من كل شهر دون استثناء.',
     t1_author: 'مدير العمليات — موديرن سبلايز',
     t2_text:   'انخفضت أخطاء تقديم الضريبة إلى شبه صفر بعد أن وحّد عمرو سير عمل ضريبة القيمة المضافة. دقيق وموثوق.',
-    t2_author: 'مسؤول المالية — مصافي للمياه',
+    t2_author: 'مسؤول المالية — مسافي للمياه',
 
     // ── Contact
     contact_label: 'تواصل معي',
